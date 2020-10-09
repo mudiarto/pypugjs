@@ -3,14 +3,17 @@ cache: pip
 sudo: false
 
 python:
-  - "2.7"
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.9"
 
 env:
   - DJANGO=1.11
   - DJANGO=2.0
+  - DJANGO=3.0
 
 install:
   - pip install jinja2 mako tornado six coverage nose codecov flake8
@@ -18,8 +21,6 @@ install:
 
 matrix:
     fast_finish: true
-    exclude:
-      - { python: "2.7", env: DJANGO=2.0 }
 
 #    allow_failures:
 #      - env: DJANGO=master
