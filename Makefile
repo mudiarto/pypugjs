@@ -67,5 +67,5 @@ release: clean ## package and upload a release (working dir must be clean)
 			4 ) break;; \
 			* ) echo "Please answer 1-3.";; \
 		esac \
-	done && git push --tags && python setup.py bdist_wheel && twine upload dist/*
+	done && git push --tags && python setup.py sdist bdist_wheel && twine upload dist/*
 
