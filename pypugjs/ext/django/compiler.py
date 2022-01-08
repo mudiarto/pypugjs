@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.utils.encoding import force_text as to_text
+from django.utils.encoding import force_str as to_text
 from django.utils.translation import template
 
 from pypugjs import Compiler as _Compiler, register_filter
