@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-__version__ = '5.9.9'
+__version__ = '5.9.10'
 
 from .compiler import Compiler  # noqa
 from .ext import html
