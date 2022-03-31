@@ -1,8 +1,8 @@
 import os
 
-from jinja2 import Markup
 from jinja2.ext import Extension
 from jinja2.runtime import Undefined
+from markupsafe import Markup
 
 import pypugjs.runtime
 from pypugjs import Compiler as _Compiler
