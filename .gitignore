@@ -49,3 +49,4 @@ output/*/index.html
 docs/_build
 /.idea/
 Pipfile.lock
+.venv
