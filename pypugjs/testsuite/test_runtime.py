@@ -1,5 +1,5 @@
-import unittest
 import tempfile
+import unittest
 
 from pypugjs import runtime
 
@@ -18,12 +18,12 @@ class TestIteration(unittest.TestCase):
         assert list(runtime.iteration(test_list, 2)) == test_list
 
     def test_it_extends_with_index_if_items_are_iterable(self):
-        test_list = [('a',), ('b',)]
-        assert list(runtime.iteration(test_list, 2)) == [('a', 0), ('b', 1)]
+        test_list = [("a",), ("b",)]
+        assert list(runtime.iteration(test_list, 2)) == [("a", 0), ("b", 1)]
 
     def test_it_adds_index_if_items_are_strings(self):
-        test_list = ['a', 'b']
-        assert list(runtime.iteration(test_list, 2)) == [('a', 0), ('b', 1)]
+        test_list = ["a", "b"]
+        assert list(runtime.iteration(test_list, 2)) == [("a", 0), ("b", 1)]
 
     def test_it_adds_index_if_items_are_non_iterable(self):
         test_list = [1, 2]
@@ -43,19 +43,18 @@ class TestOpen(unittest.TestCase):
     def test_encoding_taken_directly(self):
         """If an encoding is given, we don't try to make a guess."""
         with tempfile.NamedTemporaryFile() as file:
-            file.write('✔️¿¿«Not valid Latin-1»??'.encode('utf-8'))
+            file.write("✔️¿¿«Not valid Latin-1»??".encode("utf-8"))
             file.seek(0)
 
-            with runtime.open(file.name, encoding='latin1') as handle:
+            with runtime.open(file.name, encoding="latin1") as handle:
                 self.assertEqual(
-                    handle.read(),
-                    'â\x9c\x94ï¸\x8fÂ¿Â¿Â«Not valid Latin-1Â»??'
+                    handle.read(), "â\x9c\x94ï¸\x8fÂ¿Â¿Â«Not valid Latin-1Â»??"
                 )
 
     def test_guess_is_made_without_encoding(self):
         with tempfile.NamedTemporaryFile() as file:
-            file.write('我没有埋怨，磋砣的只是一些时间。'.encode('utf-32'))
+            file.write("我没有埋怨，磋砣的只是一些时间。".encode("utf-32"))
             file.seek(0)
 
             with runtime.open(file.name) as handle:
-                self.assertEqual(handle.encoding, 'utf_32')
+                self.assertEqual(handle.encoding, "utf_32")

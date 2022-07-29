@@ -27,20 +27,18 @@ init2: ## create virtualenv for python2
 	pipenv install --two
 
 lint: ## check style with flake8
-#	@echo "\nlooking for lints .."
-#	@echo "===================="
 	@flake8 pypugjs
 
 test: ## run testsuite
 	@SCRIPT_DIR=$$( cd "$$( dirname "$$0" )" && pwd ); \
 	export PYTHONPATH=$$PYTHONPATH:$$SCRIPT_DIR; \
-	nosetests -w pypugjs/testsuite/ # --nocapture  # for debugging
+	pytest pypugjs/testsuite/
 	@make lint
 
 coverage:  ## test and generate coverage data
 	@SCRIPT_DIR=$$( cd "$$( dirname "$$0" )" && pwd ); \
 	export PYTHONPATH=$$PYTHONPATH:$$SCRIPT_DIR; \
-	nosetests -w pypugjs/testsuite/ --with-coverage
+	pytest pypugjs/testsuite/ --cov pypugjs
 	@make lint
 
 view-coverage: coverage ## open coverage report in the browser
