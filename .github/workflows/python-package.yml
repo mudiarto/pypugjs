@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install jinja2 mako tornado six coverage nose codecov flake8 charset_normalizer
+        python -m pip install jinja2 mako tornado six coverage pytest pytest-cov codecov flake8 charset_normalizer
         python -m pip install django==${{matrix.django}}
     - name: Flake8
       run: |
