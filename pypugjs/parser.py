@@ -94,10 +94,14 @@ class Parser(object):
         if hasattr(self, funcName):
             return getattr(self, funcName)()
         else:
-            raise Exception(
-                'unexpected token "%s" in file %s on line %d'
-                % (t, self.filename, self.line())
-            )
+            # @mudiarto - ignore unexpected token
+            return self.parseUnknown()
+            # ORIGINAL CODE:
+            # raise Exception(
+            #     'unexpected token "%s" in file %s on line %d'
+            #     % (t, self.filename, self.line())
+            # )
+
 
     def parseString(self):
         tok = self.expect('string')
@@ -201,7 +205,7 @@ class Parser(object):
     def parseCall(self):
         tok = self.expect('call')
         name = tok.val
-        args = tok.args
+        args = tok.args  # .replace("\n", " ").strip()
         if args is None:
             args = ""
         block = self.block() if 'indent' == self.peek().type else None
@@ -368,3 +372,10 @@ class Parser(object):
                     tag.block = block
 
         return tag
+
+    # @mudiarto - ignore unexpected token - assume text
+    def parseUnknown(self):
+        tok = self.advance()
+        node = nodes.Text(tok.val)
+        node.line = self.line()
+        return node
